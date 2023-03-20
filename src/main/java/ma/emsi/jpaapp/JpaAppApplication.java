@@ -34,5 +34,14 @@ public class JpaAppApplication implements CommandLineRunner {
                     System.out.println(patient.getScore());
                 }
         );
+        System.out.println("**************************************");
+        Patient patient = patientRepository.findById(1L).orElse(null);
+        if (patient != null) {
+            System.out.println("==========================================");
+            System.out.println(patient.getNom());
+            System.out.println(patient.getDateNaissance());
+            System.out.println(patient.isMalade());
+            System.out.println(patient.getScore());
+        }
     }
 }
