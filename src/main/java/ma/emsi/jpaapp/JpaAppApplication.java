@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Date;
 import java.util.List;
@@ -24,10 +26,11 @@ public class JpaAppApplication implements CommandLineRunner {
         for (int i = 0; i < 100; i++) {
             patientRepository.save(new Patient(null, "Med", new Date(), true, (int)(Math.random() * 100)));
         }
-        List<Patient> patients = patientRepository.findAll();
+        Page<Patient> patients = patientRepository.findAll(PageRequest.of(0, 5));
         patients.forEach(
                 patient -> {
                     System.out.println("==========================================");
+                    System.out.println(patient.getId());
                     System.out.println(patient.getNom());
                     System.out.println(patient.getDateNaissance());
                     System.out.println(patient.isMalade());
