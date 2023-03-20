@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
 public class JpaAppApplication implements CommandLineRunner {
@@ -23,5 +24,15 @@ public class JpaAppApplication implements CommandLineRunner {
         patientRepository.save(new Patient(null, "Ayman", new Date(), false, 56));
         patientRepository.save(new Patient(null, "Med", new Date(), true, 82));
         patientRepository.save(new Patient(null, "Amina", new Date(), false, 24));
+        List<Patient> patients = patientRepository.findAll();
+        patients.forEach(
+                patient -> {
+                    System.out.println("==========================================");
+                    System.out.println(patient.getNom());
+                    System.out.println(patient.getDateNaissance());
+                    System.out.println(patient.isMalade());
+                    System.out.println(patient.getScore());
+                }
+        );
     }
 }
