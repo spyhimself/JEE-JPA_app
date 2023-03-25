@@ -32,7 +32,8 @@ public class JpaAppApplication implements CommandLineRunner {
         System.out.println("Page Number : " + patients.getNumber());
         List<Patient> content = patients.getContent();
         Page<Patient> byMalade = patientRepository.findByMalade(true, PageRequest.of(0, 3));
-        byMalade.forEach(
+        List<Patient> patientList = patientRepository.chercherPatient(new Date(), new Date(), "%h%");
+        patientList.forEach(
                 patient -> {
                     System.out.println("==========================================");
                     System.out.println(patient.getId());

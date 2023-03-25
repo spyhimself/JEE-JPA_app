@@ -11,11 +11,12 @@ import java.util.Date;
 import java.util.List;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
+    Patient p = new Patient();
     public List<Patient> findByMalade(boolean m);
     public Page<Patient> findByMalade(boolean m, Pageable pageable);
     public List<Patient> findByMaladeAndScoreLessThan(boolean m, int score);
     public List<Patient> findByMaladeIsTrueAndScoreLessThan(int score);
     public List<Patient> findByDateNaissanceBetweenAndMaladeIsTrueOrNomLike(Date d1, Date d2, String mc);
-    @Query("select p from Patient where p.dateNaissance between :x and :y or p.nom like :z")
+    @Query("select p from Patient p where p.dateNaissance between :x and :y or p.nom like :z")
     public List<Patient> chercherPatient(@Param("x") Date d1,@Param("y") Date d2,@Param("z") String mc);
 }
